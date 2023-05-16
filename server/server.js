@@ -2,14 +2,16 @@ require("dotenv").config()
 
 const express = require("express")
 const app = express()
+const cors = require('cors')
 app.use(express.json())
-app.use(express.static("public"))
-
+app.use(cors({
+    origin: 'http://localhost:5500'
+}))
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
 
 const storeItems = new Map([
-    [1, {priceInCents: 3, name:'stripe test purchase'}],
-    [2, {priceInCents: 9, name:'stripe test purchase not used'}]
+    [1, {priceInCents: 50, name:'stripe test purchase'}],
+    [2, {priceInCents: 66, name:'stripe test purchase not used'}]
 ])
 
 app.post('/create-checkout-session', async (req, res) => {
@@ -30,8 +32,8 @@ app.post('/create-checkout-session', async (req, res) => {
                     quantity: item.quantity
                 }
             }),
-            success_url: `${process.env.SERVER_URL}/success.html`,
-            cancel_url: `${process.env.SERVER_URL}/cancel.html`,
+            success_url: `${process.env.CLIENT_URL}/success.html`,
+            cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
         })
         res.json({ url: session.url })
     }catch (e) {
@@ -39,5 +41,5 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 })
 
-console.log(`server running at http://localhost:3000`)
+console.log(`server running at http://localhost:5500/client/index.html`)
 app.listen(3000)
