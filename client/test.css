@@ -64,6 +64,7 @@
     width: 0.12rem;
     height: 1rem;
     background-color: #888 ;
+    z-index: 100;
   }
   
   .timeline li:nth-child(even) ::before {
@@ -114,6 +115,11 @@
     background-color: #888;
     color: #fff;
     border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     overflow: hidden;
   }
 
@@ -129,4 +135,20 @@
     border-radius: 1rem;
     padding: 1rem;
     background-image: linear-gradient(45deg, var(--primary-color), magenta);
+    
+    box-shadow: 0 .1rem .4rem #0004;
+    
+    z-index: 100;
+  }
+
+  .data h3 {
+    text-transform: capitalize;
+    margin-left: 1.3rem;
+  }
+
+  .data p {
+    background-color:  #fff3;
+    padding: 1rem ;
+    border-radius:1rem ;
+   
   }
