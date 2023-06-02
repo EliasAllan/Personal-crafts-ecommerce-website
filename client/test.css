@@ -130,6 +130,8 @@
     background-color: var(--primary-color);
     --scale: 1.2;
     cursor:pointer;
+    z-index: 200;
+
   }
 
   .data.show{
